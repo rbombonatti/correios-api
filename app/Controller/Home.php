@@ -8,10 +8,21 @@ class Home{
     
     public static function getHome()
     {
-        return View::render('home', [
-            'name' => 'Home',
-            'title' => 'h1 da Home',
+        echo View::render('home', [
+            'name' => 'Lista de Países',
+            'title' => 'Países',
+            'paises' => CorreiosApi::getCountriesMenu(),
             ]
         );
     }
+
+    public static function getCities($sgPais)
+    {
+        echo View::render('_cidades', [
+            'name' => 'Lista de Cidades',
+            'title' => 'Cidades',
+            'content' => CorreiosApi::listCities($sgPais),
+            ]
+        );
+    }    
 }

@@ -1,1 +1,29 @@
 <h1 class='align-left font-xg'>{{title}}</h1>
+
+
+
+<form id="formCountries">
+    <select name='sgPais'>
+        {{paises}}
+    </select>
+    <button type="submit">Buscar Cidades</button>
+</form>
+
+<div id="response"></div>
+
+<script>
+    $(document).ready(function () {
+        $('#formCountries').submit(function (e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: "POST",
+                url: "index.php/getCities", 
+                data: formData,
+                success: function (data) {
+                    $('#response').html(data);
+                }
+            });
+        });
+    });
+</script>

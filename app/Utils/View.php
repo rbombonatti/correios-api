@@ -12,7 +12,6 @@ class View
     {
         $file = __DIR__.'/../../resources/'. $view. '.html';
         $fileToShow = file_exists($file) ? $file : self::file_404;
-        // $template = file_get_contents(self::file_header);
         $content = file_get_contents($fileToShow);
 
         return $content;
@@ -20,11 +19,13 @@ class View
 
     public static function render($view, $viewInfo = []) 
     {
-        $templateView = str_replace(
-            self::content_string, 
-            self::getContentView($view), 
-            file_get_contents(self::file_template)
-        );
+        $templateView = (substr($view, 0, 1) !== '_') 
+            ? str_replace(
+                self::content_string, 
+                self::getContentView($view), 
+                file_get_contents(self::file_template)
+            )
+            : self::getContentView($view);
 
         $keys = array_keys($viewInfo);
         $keys = array_map(function($item){
