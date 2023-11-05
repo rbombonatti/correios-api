@@ -11,4 +11,14 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable('.'); 
 $dotenv->load();
 
-echo Home::getHome();
+$controller = (isset($_SERVER["PATH_INFO"])) ? str_replace('/', '', $_SERVER["PATH_INFO"]) : '';
+
+switch ($controller) {
+    case 'getCities':
+        Home::getCities($_POST['sgPais']);
+        break;
+    
+    default:
+        Home::getHome();
+        break;
+}
