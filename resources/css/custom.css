@@ -1,0 +1,28 @@
+.align-center {
+    text-align: center;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.font-p {
+    font-size: 1em;
+}
+
+.font-m {
+    font-size: 1.5em;
+}
+
+.font-g {
+    font-size: 2em;
+}
+
+.font-xg {
+    font-size: 3em;
+}
+
