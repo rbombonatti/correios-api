@@ -2,22 +2,17 @@
 
 namespace App\Controller;
 
+use App\Model\City;
+use App\Utils\Sanitize;
 
 class CorreiosApi 
 {
     const countriesFilter = [
         'ARGENTINA',
-        'AUSTRIA',
-        'AUSTRALIA',
         'BELARUS',
-        'CANADA',
         'BOLIVIA',
         'BULGARIA',
         'BELGICA',
-        'ESTADOS UNIDOS',
-        'ALEMANHA',
-        'ITALIA',
-        'FRANÇA',
         'BRASIL'
     ];
 
@@ -80,7 +75,22 @@ class CorreiosApi
         $url = $_ENV['BASE_URL'] . "/localidades/v1/paises/$sgPais/cidades?page=1&size=99999";
         $response = self::sendInformation('GET', $url);
         $response = json_decode($response, true);
+        $cityObj = new City(); 
 
-        return number_format(count($response['cidades']),0, ',', '.') . ' cidades encontradas';
+        $savedCities = array_map(function($city) {
+            return $city['city_name'];
+        }, $cityObj->readCities($sgPais));
+
+        $newCities = [];
+        foreach ($response['cidades'] as $key => $city) {
+            if (!in_array(Sanitize::clearString($city['noCidade']), $savedCities)) array_push($newCities, $city);
+        }
+
+        if (count($newCities)) {
+            return $cityObj->create($newCities);
+        } else {
+            return '- Todas as cidades já estão salvas no banco de dados';
+        }
+
     }
 }
