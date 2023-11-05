@@ -1,4 +1,11 @@
 ## correiosApi
 
 
-### 1) Executar o comando composer install
+#### 1) Executar o comando composer install
+#### 2) Atualizar o arquivo <b>.env</b> com as informações: 
+
+```
+    BASE_URL='https://apihom.correios.com.br/token/v1/'
+    USER_LOGIN='LOGIN (FORMATO CNPJ SEM PONTOS)'
+    USER_PASSWORD='TOKEN GERADO EM https://cwshom.correios.com.br/acesso-componentes'
+```
