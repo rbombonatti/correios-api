@@ -1,8 +1,8 @@
 ## correiosApi
 
 
-#### 1) Executar o comando ```composer install```
-#### 2) Atualizar o arquivo <b>.env</b> com as informações: 
+1) Executar o comando ```composer install```
+2) Atualizar o arquivo <b>.env</b> com as informações: 
 
 ```
     BASE_URL='https://apihom.correios.com.br/token/v1/'
@@ -15,7 +15,7 @@
     DATABASE_PASSWORD=
 ```
 
-#### 3) Crie a tabela <b>city</b>:
+3) Crie a tabela <b>city</b>:
 
 ```sql
 CREATE TABLE city (
@@ -24,12 +24,11 @@ CREATE TABLE city (
 	city_name varchar(255) NULL,
 	city_code varchar(20) NULL
 )
-
 ```
 
 <hr>
 
-#### 4) Crie a tabela <b>customer_order</b>:
+4) Crie a tabela <b>customer_order</b>:
 
 ```sql
 CREATE TABLE customer_order (
@@ -45,7 +44,7 @@ CREATE TABLE customer_order (
 )
 ```
 
-#### 5) No arquivo <b>read_csv_file.php</b> inclua os dados: 
+5) No arquivo <b>read_csv_file.php</b> inclua os dados: 
 
 ```
     $dbname = '';
@@ -53,4 +52,6 @@ CREATE TABLE customer_order (
     $senha = '';
 ```
 
-#### 6) No terminal, execute o comando ```php read_csv_file.php [nome_do_arquivo.csv]```
+6) Para acessar a leitura de arquivo csv, no terminal, execute o comando ```php read_csv_file.php [nome_do_arquivo.csv]```
+
+7) Para acessar a busca por países / cidades, ```http://localhost/```
