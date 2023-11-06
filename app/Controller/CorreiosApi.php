@@ -91,6 +91,5 @@ class CorreiosApi
         } else {
             return '- Todas as cidades já estão salvas no banco de dados';
         }
-
     }
 }

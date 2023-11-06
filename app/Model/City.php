@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace App\Model;
 
 use App\Utils\Sanitize;
 
-class City {
+class City
+{
 
     private $conn;
     private $table_name = 'city';
@@ -14,20 +15,21 @@ class City {
     public $city_name;
     public $city_code;
 
-    public function __construct() {
+    public function __construct()
+    {
         $database = new Database();
         $this->conn = $database->getConnection();
     }
 
-    public function create($cities) {
-
+    public function create($cities)
+    {
         try {
             $query = "INSERT INTO $this->table_name 
                 (city_country, 
                 city_name, 
                 city_code) 
                 VALUES ";
-                
+
             foreach ($cities as $key => $city) {
                 $city_country = Sanitize::clearString($city['sgPais']);
                 $city_name = Sanitize::clearString($city['noCidade']);
@@ -44,13 +46,13 @@ class City {
             if ($stmt->execute()) {
                 return number_format($stmt->rowCount(), 0, ',', '.') . ' cidades inseridas!';
             }
-
         } catch (\PDOException $e) {
             return "Erro: " . $e->getMessage();
         }
     }
 
-    public function readCities($sgPais) {
+    public function readCities($sgPais)
+    {
         try {
             $query = "
                 SELECT 
@@ -63,13 +65,13 @@ class City {
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
         } catch (\PDOException $e) {
             return "Erro: " . $e->getMessage();
         }
     }
 
-    public function getCitiesSumary() {
+    public function getCitiesSumary()
+    {
         try {
             $query = "
                 SELECT city_country, count(city_id) as total 
@@ -80,10 +82,8 @@ class City {
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
         } catch (\PDOException $e) {
             return "Erro: " . $e->getMessage();
         }
     }
-
 }

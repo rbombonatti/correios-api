@@ -30,11 +30,10 @@ class Home{
         );
     }
 
-    public function getDatagrid() {
-        
+    public function getDatagrid() 
+    {
         $citiesSumary = (new City())->getCitiesSumary();
         $citiesTotal = 0;
-
         $dataGrid = "
             <table class='table'>
                 <tr>

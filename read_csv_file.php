@@ -1,6 +1,6 @@
 <?php
 
-function connection() 
+function connection()
 {
     $host = 'localhost';
     $dbname = '';
@@ -36,8 +36,8 @@ function formatStringToCurrency($original)
     return $formated;
 }
 
-function dateFormat($originalDate) 
-{   
+function dateFormat($originalDate)
+{
     $newDate = DateTime::createFromFormat('d/m/y', $originalDate);
     return $newDate->format('Y-m-d');
 }
@@ -46,10 +46,10 @@ function formatCustomerId($originalCustomerId)
 {
     $customerId = str_replace('.', '', $originalCustomerId);
     return str_replace('-', '', $customerId);
-
 }
 
-function insertRecord($lines) {
+function insertRecord($lines)
+{
     try {
         $sql = "INSERT INTO customer_order 
                     (order_id,
@@ -60,14 +60,14 @@ function insertRecord($lines) {
                     product_id,
                     quantity,
                     order_description) 
-                VALUES "; 
+                VALUES ";
 
-        for ($i=0; $i < count($lines) ; $i++) { 
-            
+        for ($i = 0; $i < count($lines); $i++) {
+
             if ($i === 0) continue;
-            
+
             $dados = explode(",", $lines[$i]);
-            
+
             $order_id = $dados[0];
             $customer_id = formatCustomerId($dados[1]);
             $delivery_date = dateFormat($dados[2]);
@@ -75,8 +75,8 @@ function insertRecord($lines) {
             $order_value = formatStringToCurrency($dados[4] . ',' . $dados[5]);
             $product_id = $dados[6];
             $quantity = $dados[7];
-            $order_description = clearString($dados[8] . $lines[$i+1] . $lines[$i+2]); 
-            $i= $i+2;
+            $order_description = clearString($dados[8] . $lines[$i + 1] . $lines[$i + 2]);
+            $i = $i + 2;
 
             $sql .= "('$order_id',
                 '$customer_id',
@@ -87,19 +87,17 @@ function insertRecord($lines) {
                 '$quantity',
                 '$order_description'
             ),";
-
         }
 
         $sql = substr($sql, 0, -1);
         $stmt = connection()->prepare($sql);
-        
+
         if ($stmt->execute()) {
             return $stmt->rowCount() . ' registros inseridos!';
         }
-
     } catch (PDOException $e) {
         return "\n\nErro na inserção dos dados: " . $e->getMessage();
-    } 
+    }
 }
 
 if (count($argv) != 2) {

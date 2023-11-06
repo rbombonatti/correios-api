@@ -1,9 +1,10 @@
-<?php 
+<?php
 
 namespace App\Utils;
 
 
-class Sanitize {
+class Sanitize
+{
 
     public static function clearString($original)
     {
@@ -12,5 +13,4 @@ class Sanitize {
 
         return $sanitized;
     }
-
 }
