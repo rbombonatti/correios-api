@@ -17,7 +17,11 @@ switch ($controller) {
     case 'getCities':
         Home::getCities($_POST['sgPais']);
         break;
-    
+
+    case 'refreshDatagrid':
+        echo (new Home())->getDatagrid();
+        break;
+
     default:
         Home::getHome();
         break;

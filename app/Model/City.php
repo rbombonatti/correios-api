@@ -69,4 +69,21 @@ class City {
         }
     }
 
+    public function getCitiesSumary() {
+        try {
+            $query = "
+                SELECT city_country, count(city_id) as total 
+                FROM $this->table_name 
+                GROUP BY city_country 
+                ORDER BY 2 desc
+                ";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        } catch (\PDOException $e) {
+            return "Erro: " . $e->getMessage();
+        }
+    }
+
 }

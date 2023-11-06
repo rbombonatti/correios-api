@@ -1,15 +1,23 @@
-<h1 class='align-left font-xg'>{{title}}</h1>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class='align-left font-xg'>{{title}}</h1>        
+        <form id="formCountries">
+            <select name='sgPais'>
+                {{paises}}
+            </select>
+            <button type="submit">Buscar Cidades</button>
+        </form>
+        <div id="response"></div>
+      </div>
+      <div class="col">
+        <h1 class='align-left font-m'>{{subtitle}}</h1>
+        <div id="datagrid">{{datagrid}}</div>
+      </div>
+    </div>
+  </div>
 
 
-
-<form id="formCountries">
-    <select name='sgPais'>
-        {{paises}}
-    </select>
-    <button type="submit">Buscar Cidades</button>
-</form>
-
-<div id="response"></div>
 
 <script>
     $(document).ready(function () {
@@ -22,8 +30,20 @@
                 data: formData,
                 success: function (data) {
                     $('#response').html(data);
+                    refreshDatagrid();
                 }
             });
         });
     });
+
+    function refreshDatagrid() {
+        $.ajax({
+            type: "POST",
+            url: "index.php/refreshDatagrid",
+            success: function (data) {
+                $('#datagrid').html(data)
+            }
+        });
+    }
+
 </script>
