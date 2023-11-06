@@ -3,9 +3,9 @@
 function connection() 
 {
     $host = 'localhost';
-    $dbname = 'correios';
-    $usuario = 'root';
-    $senha = 'rafael83';
+    $dbname = '';
+    $usuario = '';
+    $senha = '';
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $usuario, $senha);
