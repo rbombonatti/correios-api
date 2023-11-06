@@ -26,3 +26,31 @@ CREATE TABLE city (
 )
 
 ```
+
+<hr>
+
+#### 4) Crie a tabela <b>customer_order</b>:
+
+```sql
+CREATE TABLE customer_order (
+	id INT(11) auto_increment NOT NULL PRIMARY KEY,
+	order_id VARCHAR(20) NOT NULL,
+	customer_id VARCHAR(11) NOT NULL,
+	delivery_date DATE NULL,
+	order_date DATE NOT NULL,
+	order_value DECIMAL(11,2) NOT NULL,
+	product_id INT(11) NOT NULL,
+	quantity INT(11) NOT NULL,
+	order_description LONG VARCHAR NULL
+)
+```
+
+#### 5) No arquivo <b>read_csv_file.php</b> inclua os dados: 
+
+```
+    $dbname = '';
+    $usuario = '';
+    $senha = '';
+```
+
+#### 6) No terminal, execute o comando ```php read_csv_file.php [nome_do_arquivo.csv]```
